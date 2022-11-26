@@ -1,0 +1,48 @@
+﻿@using Entities.Cocnrete
+@model List<Destination>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Aktif Rotalar</h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th> Rota</th>
+                            <th> Kapasite </th>
+                            <th> Fiyat </th>
+                            <th> Tarih </th>
+                            <th> Rezervasyon </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="py-1">
+                                    <img src="@item.Image" alt="image" />
+                                </td>
+                                <td> @item.City </td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: @item.Capacity%"></div>
+                                    </div>
+                                </td>
+                                <td> @item.Price ₺</td>
+                                <td> @item.DestinationDate.ToShortDateString() </td>
+                                <td> <a href="/member/reservation/addreservation/@item.Id"><button type="button" class="btn btn-inverse-success btn-fw">Rezervasyon Yap</button> </a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

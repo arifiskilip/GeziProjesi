@@ -1,0 +1,52 @@
+﻿@using Entities.DTOs
+@model List<ReservationDetailDto>
+
+@{
+    ViewData["Title"] = "ReservationPendingConfirmation";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Aktif Rotalar</h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th> Rota</th>
+                            <th> Kişi Sayısı </th>
+                            <th> Fiyat </th>
+                            <th> Tarih </th>
+                            <th> Rezervasyon </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="py-1">
+                                    <img src="@item.ImageUrl" alt="image" />
+                                </td>
+                                <td> @item.DestinationCity </td>
+                                <td>
+                                    @item.PersonCount
+                                </td>
+                                <td> @item.TotalPrice ₺</td>
+                                <td> @item.Date.ToShortDateString() </td>
+                                <td> <a href=""><button type="button" id="btn1" class="btn btn-inverse-danger btn-fw"> İptal Et</button> </a></td>
+                                <script>
+                                    $('#btn1').click(function () {
+                                        Swal.fire('Any fool can use a computer')
+                                    }
+                                </script>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

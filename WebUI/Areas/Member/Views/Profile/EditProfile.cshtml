@@ -1,0 +1,36 @@
+﻿@using Entities.Cocnrete
+@model AppUser
+@{
+    ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Default form</h4>
+        <p class="card-description"> Basic form layout </p>
+        <form class="forms-sample" method="post">
+            <div class="form-group">
+                <label for="exampleInputUsername1">Adınız</label>
+                <input type="text" class="form-control" asp-for="FirstName" placeholder="Ad">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">Soyadınız</label>
+                <input type="text" class="form-control" asp-for="LastName" placeholder="Soyad">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email Adresiniz</label>
+                <input type="email" class="form-control" asp-for="Email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectGender">Cinsiyet</label>
+                <select class="form-control" asp-for="Gender">
+                    <option>Erkek</option>
+                    <option>Kadın</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mr-2">Güncelle</button>
+        </form>
+    </div>
+</div>
+

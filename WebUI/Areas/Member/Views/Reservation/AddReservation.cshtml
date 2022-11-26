@@ -1,0 +1,29 @@
+﻿@using Entities.Cocnrete
+@model Reservation
+@{
+    ViewData["Title"] = "AddReservation";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Rezervasyon Sayfası</h4>
+        <form class="forms-sample" method="post">
+            <div class="form-group">
+                @Html.Label("Rota")
+                @Html.DropDownListFor(x => x.Destination, (List<SelectListItem>)ViewBag.values,
+                new {@class="form-control"})
+            </div>
+            <div class="form-group">
+                @Html.Label("Kişi Sayısı")
+                <input type="text" asp-for="PersonCount" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Açıklama")
+                <input type="texarea" asp-for="Description" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary mr-2">Rezervasyon Oluştur</button>
+        </form>
+    </div>
+</div>
+
