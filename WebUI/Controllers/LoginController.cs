@@ -59,7 +59,7 @@ namespace WebUI.Controllers
                 var result = await _userManager.CreateAsync(appUser, user.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("/Login");
+                    return RedirectToAction("Login","Login");
                 }
                 else
                 {
@@ -70,6 +70,12 @@ namespace WebUI.Controllers
                 }
             }         
             return View(user);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index","Home");
         }
     }
 }

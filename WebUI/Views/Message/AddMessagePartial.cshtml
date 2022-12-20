@@ -1,0 +1,18 @@
+﻿@using WebUI.Models
+@model MainModel
+
+<div class="col-lg-6 mt-lg-0 mt-5 contact-right">
+    <form method="post" class="signin-form" asp-controller="Message" asp-action="AddMessagePartial">
+        <div class="input-grids">
+            <div class="form-group">
+                <input type="text" asp-for="Message.Subject" id="w3lSubect" placeholder="Konu*" class="contact-input" />
+            </div>
+        </div>
+        <div class="form-group">
+            <textarea asp-for="Message.Description" id="w3lMessage" placeholder="Lütfen Mesajınızı Belirtiniz*" required=""></textarea>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-style btn-primary">Gönder</button>
+        </div>
+    </form>
+</div>

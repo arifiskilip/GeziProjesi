@@ -1,0 +1,14 @@
+﻿@using WebUI.Models
+@model MainModel
+
+<div class="col-lg-6 col-md-12 column pl-lg-5 column4 mt-lg-0 mt-5">
+    <h3>Haber Bülteni </h3>
+    <div class="end-column">
+        <h4>Güncel haberlerden bilgi olmak için gündeme abone ol.</h4>
+        <form class="subscribe" method="post" asp-controller="Newsletter" asp-action="_NewsletterPartial">
+            <input type="email" asp-for="NewsLetter.Email" placeholder="Email adresi" required="">
+            <button type="submit">Abone Ol</button>
+        </form>
+        <p>Tur, indirim ve yeni haberler için ilk sana haber verelim.</p>
+    </div>
+</div>

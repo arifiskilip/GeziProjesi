@@ -25,8 +25,8 @@
             <div class="form-group">
                 <label for="exampleSelectGender">Cinsiyet</label>
                 <select class="form-control" asp-for="Gender">
-                    <option>Erkek</option>
-                    <option>Kadın</option>
+                    <option asp-for="Gender">Erkek</option>
+                    <option asp-for ="Gender">Kadın</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary mr-2">Güncelle</button>

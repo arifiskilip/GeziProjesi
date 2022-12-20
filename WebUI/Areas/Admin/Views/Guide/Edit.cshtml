@@ -1,0 +1,54 @@
+﻿@using Entities.Cocnrete
+@model Guide
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Rehber Güncelle</h4>
+        <div class="d-flex justify-content-end">
+            <a href=""><input class="btn btn-warning" type="button" value="Resim Ekle" /></a>
+        </div>
+        <form class="forms-sample" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                @Html.Label("Adı")
+                <input type="text" asp-for="FirstName" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Soyadı")
+                <input type="text" asp-for="LastName" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Email Adresi")
+                <input type="email" asp-for="Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Yaş")
+                <input type="number" asp-for="Age" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Twitter Adresi")
+                <input type="text" asp-for="TwitterUrl" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("İnstagram Adresi")
+                <input type="text" asp-for="InstagramUrl" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Açıklama")
+                <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="ImageUrl" />
+            </div>
+            <br />
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mr-2">Güncelle</button>
+                
+            </div>
+        </form>
+    </div>
+</div>
+

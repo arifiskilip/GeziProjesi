@@ -1,7 +1,5 @@
 ﻿using Business.Abstract;
-using Entities.Cocnrete;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 
 namespace WebUI.ViewComponents.Home
@@ -20,10 +18,10 @@ namespace WebUI.ViewComponents.Home
 
             List<Entities.Cocnrete.Destination> destinationList = 
                 new List<Entities.Cocnrete.Destination>();
-            var result = _destinationService.GetAll();
+            var result = _destinationService.GetAll().Data;
             for (int i = 1; i < 6; i++)
             {
-                destinationList.Add(result.Data[result.Data.Count - i]);
+                destinationList.Add(result[i]);
             }
 
 

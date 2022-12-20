@@ -10,7 +10,7 @@
             <div class="profile-desc">
                 <div class="profile-pic">
                     <div class="count-indicator">
-                        <img class="img-xs rounded-circle " src="~/images/@Model.ImageUrl" alt="">
+                        <img class="img-xs rounded-circle " src="@Model.ImageUrl" alt="">
                         <span class="count bg-success"></span>
                     </div>
                     <div class="profile-name">
@@ -59,22 +59,22 @@
             <span class="nav-link">Navigation</span>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="~/member/profile/index">
+            <a class="nav-link" href="/member/profile/index">
                 <span class="menu-icon">
                     <i class="mdi mdi-speedometer"></i>
                 </span>
-                <span class="menu-title">Porofil</span>
+                <span class="menu-title">Profil</span>
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-icon">
                     <i class="mdi mdi-car"></i>
                 </span>
-                <span class="menu-title">User Pages</span>
+                <span class="menu-title">Rotalar</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="auth">
+            <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="/Member/Destination/Index"> Aktif Rotalar </a></li>
                     <li class="nav-item"> <a class="nav-link" href="/Member/Reservation/ReservationPendingConfirmation"> Onay Beklediğim Rotalar </a></li>
@@ -83,24 +83,20 @@
                 </ul>
             </div>
         </li>
-
-
-
-
         <li class="nav-item menu-items">
-            <a class="nav-link" href="~/member/template/pages/forms/basic_elements.html">
+            <a class="nav-link" asp-action="Index" asp-controller="Comment">
                 <span class="menu-icon">
-                    <i class="mdi mdi-playlist-play"></i>
+                    <i class="mdi mdi-comment-processing-outline"></i>
                 </span>
-                <span class="menu-title">Form Elements</span>
+                <span class="menu-title">Yorumlarım</span>
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="~/member/template/pages/tables/basic-table.html">
+            <a class="nav-link" href="/member/testimonial/Index">
                 <span class="menu-icon">
-                    <i class="mdi mdi-table-large"></i>
+                    <i class="mdi mdi-human-handsup"></i>
                 </span>
-                <span class="menu-title">Tables</span>
+                <span class="menu-title">Referans Ol</span>
             </a>
         </li>
         <li class="nav-item menu-items">

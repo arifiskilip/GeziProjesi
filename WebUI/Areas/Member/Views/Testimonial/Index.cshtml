@@ -1,0 +1,26 @@
+﻿@using Entities.Cocnrete
+@model Testimonial
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Bize Referans Olup Destek Olmaya Ne Dersin ?</h4>
+        <form class="forms-sample" asp-action="Index" asp-controller="Testimonial" method="post">
+            <div class="form-group">
+                @Html.Label("Geridönüşlerinizi Bizlerele Paylaşın")
+                <textarea class="form-control" rows="5" asp-for="Comment" required></textarea>
+                <span asp-validation-for="Comment"></span>
+            </div>
+            <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                <button type="submit" class="btn btn-primary mr-2 btn-icon-text">
+                    Gönder
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+

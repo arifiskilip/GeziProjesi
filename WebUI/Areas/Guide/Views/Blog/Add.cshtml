@@ -1,0 +1,58 @@
+﻿@using Entities.Models
+@model DestinationDetailModel
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_GuideLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Yazı Ekle</h4>
+        <form class="forms-sample" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                @Html.Label("Rota")
+                <input type="text" class="form-control" value="@ViewBag.city" readonly/>
+            </div>
+                <input type="text" class="form-control" value="@ViewBag.id" asp-for="DestinationId" style="display:none" />
+            <div class="form-group">
+                @Html.Label("Başlık 1")
+                <input type="text" asp-for="Title1" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Açıklama 1")
+                <textarea rows="3" asp-for="Description1" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                @Html.Label("Başlık 2")
+                <input type="text" asp-for="Title2" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Açıklama 2")
+                <textarea rows="3" asp-for="Description2" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    @Html.Label("Kapk Resimi")
+                    <input class="form-control" type="file" asp-for="CoverImage" />
+                </div>
+            </div>
+             <div class="form-group">
+                <div class="form-group">
+                    @Html.Label("Küçük Resim 1")
+                    <input class="form-control" type="file" asp-for="TitleImage1" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    @Html.Label("Küçük Resim 2")
+                    <input class="form-control" type="file" asp-for="TitleImage2" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mr-2">Ekle</button>
+            </div>
+        </form>
+    </div>
+</div>
+

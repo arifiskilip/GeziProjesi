@@ -1,0 +1,51 @@
+﻿@using Entities.Cocnrete
+@model List<NewsLetter>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int number = 0;
+}
+
+<div class="container">
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th>Durumu</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                number += 1;
+                <tr>
+                    <td><b>@number</b></td>
+                    <td>@item.Email</td>
+                    <td>@if (item.Status)
+                        {
+                            <span class="badge bg-label-success me-1">Aktif</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-label-danger me-1">Pasif</span>
+                        }</td>
+                    <td><a href="/Admin/Newsletter/Delete/@item.Id"><input class="btn btn-danger" value="Sil" /></a></td>
+                    <td>
+                        @if (!item.Status)
+                        {
+                            <a href="/Admin/Newsletter/ActivatedNewsletter/@item.Id"><input class="btn btn-success" value="Aktif Yap" /></a>
+                        }
+                        else
+                        {
+                            <a href="/Admin/Newsletter/DeactivatedNewsletter/@item.Id"><input class="btn btn-warning" value="Pasif Yap" /></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

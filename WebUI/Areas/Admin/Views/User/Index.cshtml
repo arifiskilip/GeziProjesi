@@ -1,0 +1,37 @@
+﻿@using Entities.Cocnrete
+@model List<AppUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int number = 0;
+}
+
+<div class="container">
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ad Soyad</th>
+                <th>Kullanıcı Adı</th>
+                <th>Email</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                number += 1;
+                <tr>
+                    <td><b>@number</b></td>
+                <td>@item.FirstName @item.LastName</td>
+                <td>@item.UserName</td>
+                <td>@item.Email</td>
+                <td><a href="/Admin/User/Delete/@item.Id"><input class="btn btn-danger" value="Sil" /></a></td>
+                    <td><a href="/Admin/Reservation/UserTourHistory/@item.Id"><input class="btn btn-info" value="Tur Geçmişi" /></a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

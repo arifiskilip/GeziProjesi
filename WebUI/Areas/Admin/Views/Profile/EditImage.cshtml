@@ -1,0 +1,28 @@
+﻿@using Entities.Cocnrete
+@model AppUser
+@{
+    ViewData["Title"] = "EditImage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-6 col-lg-4 mb-3">
+    <div class="card h-100">
+        <img class="card-img-top" src="@ViewBag.userImageUrl" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Resim Seç</h5>
+            <p class="card-text">
+                Lütfen Güncellemek İstedğiniz Resmi Seçiniz.
+            </p>
+            <form method="post" enctype="multipart/form-data">
+                <div class="d-flex justify-content-center">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="ImageUrl" type="file" id="formFile">
+                        <br />
+                        <button class="btn btn-success">Güncelle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

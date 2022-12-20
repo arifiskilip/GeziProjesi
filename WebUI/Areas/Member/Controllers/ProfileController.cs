@@ -1,4 +1,5 @@
-﻿using Entities.Cocnrete;
+﻿using Business.Abstract;
+using Entities.Cocnrete;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -6,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WebUI.Areas.Member.Controllers
 {
     [Area("Member")]
-    [AllowAnonymous]
-    [Route("{member}/{controller=Home}/{action=Index}/{id?}")]
+    [Route("member/{controller=Home}/{action=Index}/{id?}")]
     public class ProfileController : Controller
     {
         private readonly UserManager<AppUser> userManager;
@@ -42,7 +43,7 @@ namespace WebUI.Areas.Member.Controllers
                 var saveLocation = directory+"/wwwroot/images/" + imageName;
                 var stream = new FileStream(saveLocation, FileMode.Create);
                 await userEdit.ImageUrl.CopyToAsync(stream);
-                user.ImageUrl = imageName;
+                user.ImageUrl = "/images/"+imageName;
                 var result = await userManager.UpdateAsync(user);
             }
             return RedirectToAction("Index","Profile", new { area = "member" });
@@ -55,10 +56,15 @@ namespace WebUI.Areas.Member.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditProfile(AppUser user)
+        public async Task<IActionResult> EditProfile(AppUser appUser)
         {
-            await userManager.UpdateSecurityStampAsync(user);
-            return RedirectToAction("Index", "Porfile");
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            user.FirstName = appUser.FirstName;
+            user.LastName = appUser.LastName;
+            user.Email = appUser.Email;
+            user.Gender = appUser.Gender;
+            var result = await userManager.UpdateAsync(user);
+            return RedirectToAction("Index", "Profile",new { Area = "Member" });
         }
 
         [HttpGet]
@@ -79,5 +85,6 @@ namespace WebUI.Areas.Member.Controllers
             }
             return View();
         }
+
     }
 }

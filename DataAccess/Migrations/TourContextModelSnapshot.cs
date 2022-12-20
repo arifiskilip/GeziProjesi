@@ -134,7 +134,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AppUserId")
+                    b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CommentDate")
@@ -149,16 +149,13 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
                     b.HasIndex("DestinationDetailId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Entities.Cocnrete.Contact", b =>
@@ -227,7 +224,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Destinations");
                 });
 
-            modelBuilder.Entity("Entities.Cocnrete.DestinationDetail", b =>
+            modelBuilder.Entity("Entities.Cocnrete.DestinationDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -315,6 +312,35 @@ namespace DataAccess.Migrations
                     b.ToTable("Guides");
                 });
 
+            modelBuilder.Entity("Entities.Cocnrete.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Message");
+                });
+
             modelBuilder.Entity("Entities.Cocnrete.NewsLetter", b =>
                 {
                     b.Property<int>("Id")
@@ -351,6 +377,9 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("PersonCount")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("ReservationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
@@ -395,7 +424,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AppUserId")
+                    b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("Comment")
@@ -403,9 +432,6 @@ namespace DataAccess.Migrations
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -519,10 +545,12 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Entities.Cocnrete.AppUser", "AppUser")
                         .WithMany("Comments")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Entities.Cocnrete.DestinationDetail", "DestinationDetail")
-                        .WithMany()
+                    b.HasOne("Entities.Cocnrete.DestinationDetails", "DestinationDetail")
+                        .WithMany("Comments")
                         .HasForeignKey("DestinationDetailId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -532,9 +560,9 @@ namespace DataAccess.Migrations
                     b.Navigation("DestinationDetail");
                 });
 
-            modelBuilder.Entity("Entities.Cocnrete.DestinationDetail", b =>
+            modelBuilder.Entity("Entities.Cocnrete.DestinationDetails", b =>
                 {
-                    b.HasOne("Entities.Cocnrete.Destination", "Destination")
+                    b.HasOne("Entities.Cocnrete.Destination", "Destinations")
                         .WithMany("DestinationDetails")
                         .HasForeignKey("DestinationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -546,9 +574,20 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Destination");
+                    b.Navigation("Destinations");
 
                     b.Navigation("Guid");
+                });
+
+            modelBuilder.Entity("Entities.Cocnrete.Message", b =>
+                {
+                    b.HasOne("Entities.Cocnrete.AppUser", "AppUser")
+                        .WithMany("Messages")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Entities.Cocnrete.Reservation", b =>
@@ -574,7 +613,9 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Entities.Cocnrete.AppUser", "AppUser")
                         .WithMany("Testimonial")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
                 });
@@ -634,6 +675,8 @@ namespace DataAccess.Migrations
                 {
                     b.Navigation("Comments");
 
+                    b.Navigation("Messages");
+
                     b.Navigation("Reservations");
 
                     b.Navigation("Testimonial");
@@ -644,6 +687,11 @@ namespace DataAccess.Migrations
                     b.Navigation("DestinationDetails");
 
                     b.Navigation("Reservations");
+                });
+
+            modelBuilder.Entity("Entities.Cocnrete.DestinationDetails", b =>
+                {
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("Entities.Cocnrete.Guide", b =>

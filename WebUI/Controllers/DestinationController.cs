@@ -1,10 +1,14 @@
 ﻿using Business.Abstract;
 using Entities.Cocnrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
+    [AllowAnonymous]
     public class DestinationController : Controller
     {
         private readonly IDestinationService _destinationService;
@@ -18,19 +22,22 @@ namespace WebUI.Controllers
 
         public IActionResult Index()
         {
-            var result = _destinationService.GetAll().Data;
-            return View(result);
+            MainModel mainModel = new MainModel();
+            var result = _destinationDetailService.GetAll().Data;
+            mainModel.DestinationDetails = result;
+            return View(mainModel);
         }
-        [HttpGet]
-        public IActionResult Detail(int id)
-        {
-            var result = _destinationDetailService.GetByIdToRelationship(id);
-            return View(result.Data);
-        }
-        [HttpPost]
-        public IActionResult Detail(Destination destination)
+        public IActionResult _SearchDestination()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult GetSearchDestinations(MainModel model)
+        {
+            var result = _destinationService.GetSearchDestinations(model.GetSearchDestinationsModel.StartingDate
+                , model.GetSearchDestinationsModel.EndDate).Data;
+            model.GetSearchDestinationsModel.Destinations = result;
+            return View(model); 
         }
     }
 }

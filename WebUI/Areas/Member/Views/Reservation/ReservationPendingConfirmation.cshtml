@@ -1,5 +1,5 @@
-﻿@using Entities.DTOs
-@model List<ReservationDetailDto>
+﻿@using Entities.Cocnrete
+@model List<Reservation>
 
 @{
     ViewData["Title"] = "ReservationPendingConfirmation";
@@ -27,15 +27,15 @@
                         {
                             <tr>
                                 <td class="py-1">
-                                    <img src="@item.ImageUrl" alt="image" />
+                                    <img src="@item.Destination.Image" alt="image" />
                                 </td>
-                                <td> @item.DestinationCity </td>
+                                <td> @item.Destination.City </td>
                                 <td>
                                     @item.PersonCount
                                 </td>
                                 <td> @item.TotalPrice ₺</td>
-                                <td> @item.Date.ToShortDateString() </td>
-                                <td> <a href=""><button type="button" id="btn1" class="btn btn-inverse-danger btn-fw"> İptal Et</button> </a></td>
+                                <td> @item.Destination.DestinationDate.ToShortDateString() </td>
+                                <td> <a href="/Member/Reservation/ReservationCancellation/@item.Id"><button type="button" id="btn1" class="btn btn-inverse-danger btn-fw"> İptal Et</button> </a></td>
                                 <script>
                                     $('#btn1').click(function () {
                                         Swal.fire('Any fool can use a computer')

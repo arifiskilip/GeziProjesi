@@ -1,12 +1,14 @@
 ﻿using Business.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 
 namespace WebUI.Areas.Member.Controllers
 {
 	[Area("member")]
-	[AllowAnonymous]
-	public class DestinationController : Controller
+    [Route("member/{controller}/{action}/{id?}")]
+    public class DestinationController : Controller
 	{
 		private readonly IDestinationService _destinationService;
 
@@ -17,8 +19,9 @@ namespace WebUI.Areas.Member.Controllers
 
         public IActionResult Index()
 		{
-			var result = _destinationService.GetAll();
-			return View(result.Data);
+			var result = _destinationService.GetAll().Data
+				.Where(x=> x.DestinationDate>=DateTime.UtcNow).ToList();
+			return View(result);
 		}
 	}
 }

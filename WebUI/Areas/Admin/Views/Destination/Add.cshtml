@@ -1,0 +1,53 @@
+﻿@using Entities.Models
+@model DestinationModel
+
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Rota Ekle</h4>
+        <form class="forms-sample" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                @Html.Label("Sehir Bilgisi")
+                <input type="text" asp-for="City" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Gün")
+                <input type="text" asp-for="DayNight" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Fiyat")
+                <input type="text" asp-for="Price" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Kapasite")
+                <input type="text" asp-for="Capacity" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Tarih")
+                <input class="form-control"
+                       type="datetime-local"
+                       asp-for="DestinationDate" />
+            </div>
+            <div class="form-group">
+                @Html.Label("Açıklama")
+                <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    @Html.Label("Resim Seçiniz")
+                    <input class="form-control" type="file" asp-for="Image" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mr-2">Ekle</button>
+            </div>
+        </form>
+    </div>
+</div>
+

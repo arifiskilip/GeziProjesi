@@ -1,0 +1,46 @@
+﻿@using Entities.Cocnrete
+@model List<Reservation>
+@{
+    ViewData["Title"] = "UserTourHistory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card container">
+    <h5 class="card-header">Katılınan Rotalar</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Şehir</th>
+                    <th>Kişi Sayısı</th>
+                    <th>Fiyat</th>
+                    <th>Tarih</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                <li data-bs-toggle="tooltip"
+                                data-popup="tooltip-custom"
+                                data-bs-placement="top"
+                                class="avatar avatar-xs pull-up"
+                                title="@item.Destination.City">
+                                    <img src="@item.Destination.Image" alt="Avatar" class="rounded-circle" />
+                                </li>
+                            </ul>
+                        </td>
+                        <td><i class="fab fa-react fa-lg text-info me-3"></i>                    @item.PersonCount</td>
+                        <td>@item.TotalPrice</td>
+                        <td>
+                            @item.ReservationDate
+                        </td>
+                      
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

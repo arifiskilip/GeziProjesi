@@ -1,0 +1,26 @@
+﻿@using WebUI.Models
+@model MainModel
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+<br />
+<br />
+
+<div class="card">
+    <div class="card-body">
+        <br />
+        <br />
+        <br />
+        @ViewBag.idd
+        <h4 class="card-title">Yorum Güncelle</h4>
+        <form class="forms-sample" asp-controller="Comment" asp-action="Update" method="post">
+            <div class="form-group">
+                <label for="exampleInputUsername1">Yorumunuz</label>
+                <textarea class="form-control" asp-for="Comment.CommentDetail" required ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mr-2">Güncelle</button>
+        </form>
+    </div>
+</div>
+

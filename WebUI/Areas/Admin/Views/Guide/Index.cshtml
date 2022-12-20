@@ -1,0 +1,54 @@
+﻿@using Entities.Cocnrete
+@model List<Guide>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<div class="container">
+    <div class="row mb-5">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="card h-100">
+                    <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                        <p class="card-text">
+                            @item.Description
+                            <div>
+                                <b>Email:</b> @item.Email
+                            </div>
+                            <div>
+                                <b>Yaş:</b> @item.Age
+                            </div>
+                            <div>
+                                <b>Durum:</b> @if (item.Status)
+                                {
+                                    <span class="badge bg-label-success me-1">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-label-warning me-1">Pasif</span>
+                                }
+                            </div>
+                        </p>
+                        <div class="row">
+                            <a href="/Admin/DestinationDetail/WritingsCreatedByGudie/@item.Id"><input class="btn btn-primary" value="Yazıları"></a>
+                        </div>
+                        <div class="row">
+                            <a href="/Admin/Guide/Edit/@item.Id"><input class="btn btn-warning" value="Düzenle"></a>
+                        </div>
+                        <div class="row">
+                            <a href="/Admin/Guide/Delete/@item.Id"><input class="btn btn-danger" value="Sil"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <a href="/Admin/Guide/Add"><input class="btn btn-success" value="Yazar Ekle" /></a>
+    </div>
+   
+</div>
+
+

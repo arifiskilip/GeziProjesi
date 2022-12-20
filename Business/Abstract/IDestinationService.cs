@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Cocnrete;
+using System;
 using System.Collections.Generic;
 
 namespace Business.Abstract
@@ -11,5 +12,6 @@ namespace Business.Abstract
         IResult Update(Destination destination);
         IDataResult<List<Destination>> GetAll();
         IDataResult<Destination> GetById(int id);
+        IDataResult<List<Destination>> GetSearchDestinations(DateTime StartingDate, DateTime EndDate);
     }
 }

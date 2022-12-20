@@ -1,0 +1,78 @@
+﻿@using Entities.Cocnrete
+@model List<Reservation>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <h5 class="card-header">Rota Bilgisi</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Ad Soyad</th>
+                    <th>Rota</th>
+                    <th>Rezervasyon Tarihi</th>
+                    <th>Kişi Sayısı</th>
+                    <th>Ücret</th>
+                    <th>Açıklama</th>
+                    <th>Durum</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>@item.AppUser.FirstName @item.AppUser.LastName</strong></td>
+                        <td>@item.Destination.City</td>
+                        <td>
+                            @item.ReservationDate
+                        </td>
+                        <td>
+                            @item.PersonCount
+                        </td>
+                        <td>
+                            @item.TotalPrice
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            @if (item.Status)
+                            {
+                                <span class="badge bg-label-success me-1">Aktif</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-label-warning me-1">Pasif</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/Admin/Reservation/EditReservation/@item.Id"><i class="bx bx-edit-alt me-1"></i> Düzenle</a>
+                                    <a class="dropdown-item" href="/Admin/Reservation/Delete/@item.Id"><i class="bx bx-trash me-1"></i> Sil</a>
+                                    @if (item.Status)
+                                    {
+                                        <a class="dropdown-item" href="/Admin/Reservation/DeactivateReservation/@item.Id"><i class="bx check-circle me-1"></i> Pasif Yap</a>
+                                    }
+                                    else{
+                                        <a class="dropdown-item" href="/Admin/Reservation/AcvtivateReservation/@item.Id"><i class="bx check-circle me-1"></i> Aktif Yap</a>
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

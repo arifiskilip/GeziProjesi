@@ -1,0 +1,36 @@
+﻿@using Entities.Cocnrete
+@model List<Destination>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_GuideLayout.cshtml";
+    int number = 0;
+}
+
+<table class="table table-bordered table-bordered-bd-warning mt-4">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Rota</th>
+            <th scope="col">Fiyat</th>
+            <th scope="col">Kapasite</th>
+            <th scope="col">Tarih</th>
+            <th scope="col"></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            number += 1;
+            <tr>
+                <td>@number</td>
+                <td>@item.City</td>
+                <td>@item.Price</td>
+                <td>@item.Capacity</td>
+                <td>@item.DestinationDate</td>
+                <td><a href="/Guide/Blog/Add/@item.Id" ><input class="btn btn-info" value="Blog Ekle"></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+

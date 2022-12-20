@@ -12,8 +12,9 @@ namespace Business.Abstract
         IResult Update(Reservation reservation);
         IDataResult<List<Reservation>> GetAll();
         IDataResult<Reservation> GetById(int id);
-        IDataResult<List<ReservationDetailDto>> ActiveReservations();
-        IDataResult<List<ReservationDetailDto>> ReservationPendingConfirmation();
-        IDataResult<List<ReservationDetailDto>> PastDestinations();
+        IDataResult<List<Reservation>> ActiveReservations(int id);
+        IDataResult<List<Reservation>> ReservationPendingConfirmation(int id);
+        IDataResult<List<Reservation>> PastDestinations(int id);
+        IDataResult<List<Reservation>> GetReservationInclude(); 
     }
 }

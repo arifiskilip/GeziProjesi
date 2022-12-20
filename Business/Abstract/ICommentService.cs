@@ -10,6 +10,7 @@ namespace Business.Abstract
         IResult Delete(Comment comment);
         IResult Update(Comment comment);
         IDataResult<List<Comment>> GetAll();
+        IDataResult<List<Comment>> GetCommentDetailWithInclude();
         IDataResult<Comment> GetById(int id);
     }
 }

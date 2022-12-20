@@ -7,6 +7,7 @@ namespace DataAccess.Abstract
 {
     public interface IReservationDal : IGenericRepository<Reservation>
     {
-        List<ReservationDetailDto> GetReservationDetails();  
+        List<ReservationDetailDto> GetReservationDetails();
+        List<Reservation> GetReservationInclude();
     }
 }

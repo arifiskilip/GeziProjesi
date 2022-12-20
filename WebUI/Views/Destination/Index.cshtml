@@ -1,5 +1,5 @@
-﻿@using Entities.Cocnrete;
-@model List<Destination>
+﻿@using WebUI.Models
+@model MainModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_DefaultLayout.cshtml";
@@ -20,17 +20,17 @@
     <div class="grids py-lg-5 py-md-4">
         <div class="container">
             <div class="row">
-                @foreach (var item in Model)
+                @foreach (var item in Model.DestinationDetails)
                 {
                     <div class="col-lg-4 col-md-4 col-6">
                         <div class="column">
-                            <a href="/Destination/Detail/@item.Id"><img src="@item.Image" alt="" class="img-fluid"></a>
+                            <a href="@Url.Action("Detail","Destination",new {@id =item.DestinationId})"><img src="@item.Destinations.Image" alt="" class="img-fluid"></a>
                             <div class="info">
-                                <h4><a href="blog-single.html">@item.City</a></h4>
-                                <p>@item.DayNight </p>
+                                <h4><a href="blog-single.html">@item.Destinations.City</a></h4>
+                                <p>@item.Destinations.DayNight </p>
                                 <div class="dst-btm">
                                     <h6 class="">Fiyat</h6>
-                                    <span>@item.Price ₺</span>
+                                    <span>@item.Destinations.Price ₺</span>
                                 </div>
                             </div>
                         </div>

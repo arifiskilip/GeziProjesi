@@ -4,7 +4,8 @@
     Layout = "~/Views/Shared/_DefaultLayout.cshtml";
 }
 
-@await Component.InvokeAsync("_SearchDestination")
+@*@await Component.InvokeAsync("_SearchDestination")*@
+@await Html.PartialAsync("~/Views/Destination/_SearchDestination.cshtml")
 @await Component.InvokeAsync("_PopularDestination")
 @await Component.InvokeAsync("_Statistics")
 @await Component.InvokeAsync("_NewPopularDestination")

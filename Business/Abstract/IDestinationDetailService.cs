@@ -6,12 +6,12 @@ namespace Business.Abstract
 {
     public interface IDestinationDetailService
     {
-        IResult Add(DestinationDetail destinationDetail);
-        IResult Delete(DestinationDetail destinationDetail);
-        IResult Update(DestinationDetail destinationDetail);
-        IDataResult<List<DestinationDetail>> GetAll();
-        IDataResult<DestinationDetail> GetById(int id);
+        IResult Add(DestinationDetails destinationDetail);
+        IResult Delete(DestinationDetails destinationDetail);
+        IResult Update(DestinationDetails destinationDetail);
+        IDataResult<List<DestinationDetails>> GetAll();
+        IDataResult<DestinationDetails> GetById(int id);
 
-        IDataResult<DestinationDetail> GetByIdToRelationship(int id);
+        IDataResult<DestinationDetails> GetByIdToRelationship(int id);
     }
 }

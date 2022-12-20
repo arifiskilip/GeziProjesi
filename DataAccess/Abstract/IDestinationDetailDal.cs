@@ -1,10 +1,14 @@
 ﻿using Core.DataAccess;
 using Entities.Cocnrete;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace DataAccess.Abstract
 {
-    public interface IDestinationDetailDal : IGenericRepository<DestinationDetail>
+    public interface IDestinationDetailDal : IGenericRepository<DestinationDetails>
     {
-        DestinationDetail GetByIdToRelationship(int id);
+        DestinationDetails GetByIdToRelationship(int id);
+        List<DestinationDetails> GetAllInclude(Expression<Func<DestinationDetails,bool>>filter=null);
     }
 }

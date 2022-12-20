@@ -1,8 +1,8 @@
-using Business.Abstract;
-using Business.Cocnrete;
-using DataAccess.Abstract;
+using Business.IoC;
+using Business.ValidationRules.FlunetValidation;
 using DataAccess.Cocnrete.EntityFramework;
 using Entities.Cocnrete;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,17 +44,8 @@ namespace WebUI
             });
             services.AddMvc();
 
-
-            services.AddScoped<IDestinationService, DestinationManager>();
-            services.AddScoped<IDestinationDal,EfDestinationDal>();
-            services.AddScoped<ISubAboutService, SubAboutManager>();
-            services.AddScoped<ISubAboutDal, EfSubAboutDal>();
-            services.AddScoped<IDestinationDetailService, DestinationDetailManager>();
-            services.AddScoped<IDestinationDetailDal, EfDestinationDetailDal>();
-            services.AddScoped<ICommentService, CommentManager>();
-            services.AddScoped<ICommentDal, EfCommentDal>();
-            services.AddScoped<IReservationService, ReservationManager>();
-            services.AddScoped<IReservationDal, EfReservationDal>();
+            Extensions.ContainerDependencies(services); //IoC
+            services.AddValidatorsFromAssemblyContaining<ReservationValidator>();
 
         }
 
@@ -71,6 +62,7 @@ namespace WebUI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error404", "?code={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -84,14 +76,40 @@ namespace WebUI
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapAreaControllerRoute(
-                  name: "areas",
-                  areaName:"member",
-                  pattern: "{member}/{controller=Home}/{action=Index}/{id?}"
+                  name: "MyAreaMember",
+                  areaName: "member",
+                  pattern: "member/{controller=Home}/{action=Index}/{id?}"
                 );
             });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapAreaControllerRoute(
+                  name: "MyAreaAdmin",
+                  areaName: "admin",
+                  pattern: "admin/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapAreaControllerRoute(
+                  name: "MyAreaGuide",
+                  areaName: "guide",
+                  pattern: "guide/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
+
         }
     }
 }

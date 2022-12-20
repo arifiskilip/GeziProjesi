@@ -1,0 +1,61 @@
+﻿@using Entities.Cocnrete
+@model List<Message>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <h5 class="card-header">Mesajlar</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Ad Soyad</th>
+                    <th>Konu</th>
+                    <th>Mesaj</th>
+                    <th>Tarih</th>
+                    <th>Durum</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>@item.AppUser.FirstName @item.AppUser.LastName</strong></td>
+                        <td>@item.Subject</td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            @item.Date
+                        </td>
+                        <td>
+                            @if (item.Status)
+                            {
+                                <span class="badge bg-label-success me-1">Aktif</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-label-warning me-1">Pasif</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/Admin/Message/Delete/@item.Id"><i class="bx bx-trash me-1"></i> Sil</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
